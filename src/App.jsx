@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { 
-  Moon, Sun, User, Home, Folder, Layers, LogIn, Paperclip, FileText, X
+  Moon, Sun, User, Home, Folder, LogIn, Paperclip, FileText, X
 } from "lucide-react"; 
 
 export default function App() {
@@ -10,17 +10,23 @@ export default function App() {
   const [selectedDocument, setSelectedDocument] = useState("");
   const [uploadedFile, setUploadedFile] = useState(null);
 
-  // 🆕 state untuk simpan dokumen yang sudah dipilih
+  // state untuk simpan dokumen yang sudah dipilih
   const [savedDocs, setSavedDocs] = useState([]);
 
   // Contoh data pengadaan & dokumen
-  const procurementTypes = ["Barang", "Jasa"];
+  const procurementTypes = [
+    "Pengadaan Smart Device", 
+    "Pengadaan Lisensi Robotic PACE", 
+    "Pengadaan SME Pada Aplikasi CCOS"
+  ];
+
   const documents = {
-    Barang: ["FS", "TOR", "PI", "FIP"],
-    Jasa: ["FS", "TOR", "PI", "FIP"],
+    "Pengadaan Smart Device": ["FS", "TOR", "PI", "FIP"],
+    "Pengadaan Lisensi Robotic PACE": ["FS", "TOR", "PI", "FIP"],
+    "Pengadaan SME Pada Aplikasi CCOS": ["FS", "TOR", "PI", "FIP"],
   };
 
-  // 🆕 fungsi simpan dokumen
+  // fungsi simpan dokumen
   const handleSaveDoc = () => {
     if (!uploadedFile || !selectedDocument || !selectedProcurement) return;
 
@@ -41,112 +47,79 @@ export default function App() {
   };
 
   return (
-    <div className={dark ? "dark" : ""}>
-      <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
+    <div style={{ backgroundColor: dark ? "#111827" : "#F9FAFB", color: dark ? "#E5E7EB" : "#1F2937", height: "100vh" }}>
+      <div style={{ display: "flex", height: "100%" }}>
         {/* Sidebar */}
-        <aside className="w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col p-4">
-          <div className="flex items-center space-x-2 mb-8">
-            <h1 className="text-xl font-bold text-[#1B2559]">AI Procurement</h1>
+        <aside style={{ width: "16rem", backgroundColor: dark ? "#1F2937" : "#FFFFFF", borderRight: `1px solid ${dark ? "#374151" : "#E5E7EB"}`, display: "flex", flexDirection: "column", padding: "1rem" }}>
+          <div style={{ display: "flex", alignItems: "center", marginBottom: "2rem" }}>
+            <h1 style={{ fontSize: "1.25rem", fontWeight: "bold", color: "#1B2559" }}>AI Procurement</h1>
           </div>
-          <nav className="flex flex-col space-y-3 text-gray-700 dark:text-gray-300">
-            <a href="#" className="flex items-center space-x-2 font-medium text-[#1B2559]">
-              <Home className="w-5 h-5" /> 
+          <nav style={{ display: "flex", flexDirection: "column", gap: "0.75rem", color: dark ? "#D1D5DB" : "#374151" }}>
+            <a href="#" style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontWeight: "500", color: "#1B2559" }}>
+              <Home size={20} /> 
               <span>Procurement Assistant</span>
             </a>
-            <a href="#" className="flex items-center space-x-2">
-              <Folder className="w-5 h-5" />
+            <a href="#" style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+              <Folder size={20} />
               <span>My Procurement</span>
             </a>
-            <a href="#" className="flex items-center space-x-2">
-              <Layers className="w-5 h-5" />
-              <span>Templates</span>
-            </a>
           </nav>
-          <div className="mt-auto flex justify-between items-center">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 rounded-full bg-indigo-500"></div>
-              <span className="text-sm text-gray-700 dark:text-gray-300">Via Uni Rosa</span>
+          <div style={{ marginTop: "auto", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+              <div style={{ width: "2rem", height: "2rem", borderRadius: "9999px", backgroundColor: "#6366F1", display: "flex", alignItems: "center", justifyContent: "center"}}>
+                <User className="w-5 h-5 text-['000000']" />
+              </div>
+              <span style={{ fontSize: "0.875rem", color: dark ? "#D1D5DB" : "#374151" }}>Via Uni Rosa</span>
             </div>
             <button
               onClick={() => console.log("Logout clicked")}
-              className="flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium text-gray-500 hover:bg-gray-100 dark:hover:bg-red-700 transition"
+              style={{ display: "flex", alignItems: "center", gap: "0.5rem", padding: "0.5rem 0.75rem", borderRadius: "0.5rem", fontSize: "0.875rem", fontWeight: "500", color: "#6B7280", backgroundColor: dark ? "#B91C1C" : "#F3F4F6" }}
             >
-              <LogIn className="w-5 h-5 transform rotate-180" />
+              <LogIn size={20} style={{ transform: "rotate(180deg)" }} />
             </button>
           </div>
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 flex flex-col">
+        <main style={{ flex: 1, display: "flex", flexDirection: "column" }}>
           {/* Topbar */}
-          <header className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-            <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+          <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "1rem", borderBottom: `1px solid ${dark ? "#374151" : "#E5E7EB"}`, backgroundColor: dark ? "#1F2937" : "#FFFFFF" }}>
+            <h2 style={{ fontSize: "1.125rem", fontWeight: "600", color: dark ? "#E5E7EB" : "#1F2937" }}>
               Procurement Assistant
             </h2>
-            <div className="flex items-center space-x-4">
+            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
               <button
                 onClick={() => setDark(!dark)}
-                className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700"
+                style={{ padding: "0.5rem", borderRadius: "0.5rem", backgroundColor: dark ? "#374151" : "#F3F4F6" }}
               >
                 {dark ? (
-                  <Sun className="w-4 h-4 text-yellow-400" />
+                  <Sun size={16} color="#FACC15" />
                 ) : (
-                  <Moon className="w-4 h-4 text-gray-600" />
+                  <Moon size={16} color="#4B5563" />
                 )}
               </button>
-              <User className="w-6 h-6 text-gray-500 dark:text-gray-300" />
+              <User size={24} color={dark ? "#D1D5DB" : "#6B7280"} />
             </div>
           </header>
 
           {/* Chat Area */}
-          <section className="flex-1 overflow-y-auto p-6 space-y-6">
-
-            {/* 🆕 Dokumen Tersimpan selalu di atas chat */}
-            {savedDocs.length > 0 && (
-              <div className="space-y-2 mb-6">
-                <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
-                  Dokumen Tersimpan
-                </h3>
-                {savedDocs.map((doc, idx) => (
-                  <div 
-                    key={idx} 
-                    className="flex items-center justify-between gap-2 p-2 bg-white dark:bg-gray-800 rounded-lg border shadow-sm"
-                  >
-                    <div className="flex items-center gap-2">
-                      <FileText className="w-5 h-5 text-indigo-500" />
-                      <span className="text-gray-700 dark:text-gray-200 text-sm">
-                        {doc.procurement} – {doc.document} – {doc.fileName}
-                      </span>
-                    </div>
-                    
-                    {/* 🆕 Tombol hapus */}
-                    <button
-                      onClick={() =>
-                        setSavedDocs((prev) => prev.filter((_, i) => i !== idx))
-                      }
-                      className="p-1 rounded hover:bg-red-100 dark:hover:bg-red-700"
-                    >
-                      <X className="w-4 h-4 text-red-500" />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
-
+          <section style={{ flex: 1, overflowY: "auto", padding: "1.5rem" }}>
             {/* Chat Example */}
-            <div className="flex items-start space-x-3 justify-end">
-              <div className="max-w-xl bg-indigo-50 dark:bg-indigo-900/40 p-4 rounded-2xl shadow">
-                <p className="text-sm text-gray-700 dark:text-gray-200">
-                  “Memo Pembentukan Panitia Pengadaan.docx telah saya upload. Bisa dianalisis, AI?”
+            <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "flex-start", gap: "0.75rem" }}>
+              <div style={{ maxWidth: "36rem", backgroundColor: dark ? "#312E81" : "#EEF2FF", padding: "1rem", borderRadius: "1rem", boxShadow: "0 1px 2px rgba(0,0,0,0.1)" }}>
+                <p style={{ fontSize: "0.875rem", color: dark ? "#E5E7EB" : "#374151" }}>
+                  “Memo Pembentukan Panitia Pengadaan.docx telah saya upload. Bisa dianalisis?”
                 </p>
               </div>
-              <div className="w-10 h-10 rounded-full bg-indigo-500 flex-shrink-0"></div>
+              <div style={{ width: "2.5rem", height: "2.5rem", borderRadius: "9999px", backgroundColor: "#EF4444", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center"}}>
+                <User className="w-5 h-5 text-['000000']" />
+              </div>
             </div>
 
-            <div className="flex items-start space-x-3">
-              <div className="w-10 h-10 rounded-full bg-red-500 flex-shrink-0"></div>
-              <div className="max-w-xl bg-white dark:bg-gray-800 p-4 rounded-2xl shadow">
-                <p className="text-sm text-gray-700 dark:text-gray-200">
+            <div style={{ display: "flex", alignItems: "flex-start", gap: "0.75rem", marginTop: "1rem" }}>
+              <div style={{ width: "2.5rem", height: "2.5rem", borderRadius: "9999px", backgroundColor: "#6366F1", flexShrink: 0 }}></div>
+              <div style={{ maxWidth: "36rem", backgroundColor: dark ? "#1F2937" : "#FFFFFF", padding: "1rem", borderRadius: "1rem", boxShadow: "0 1px 2px rgba(0,0,0,0.1)" }}>
+                <p style={{ fontSize: "0.875rem", color: dark ? "#E5E7EB" : "#374151" }}>
                   “Okay, ini analisis lengkap untuk Memo Pembentukan Panitia Pengadaan: <br />
                   - Penjelasan dasar <br />
                   - Daftar poin wajib <br />
@@ -158,21 +131,56 @@ export default function App() {
             </div>
           </section>
 
+          {/* Dokumen Tersimpan dipindah ke atas input box */}
+          {savedDocs.length > 0 && (
+            <div style={{ padding: "1rem", borderTop: `1px solid ${dark ? "#374151" : "#E5E7EB"}`, backgroundColor: dark ? "#111827" : "#F9FAFB" }}>
+              <h3 style={{ fontSize: "0.875rem", fontWeight: "600", color: dark ? "#D1D5DB" : "#4B5563" }}>
+                Dokumen Tersimpan
+              </h3>
+              <div style={{ maxHeight: "8rem", overflowY: "auto", marginTop: "0.5rem" }}>
+                {savedDocs.map((doc, idx) => (
+                  <div 
+                    key={idx} 
+                    style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "0.5rem", padding: "0.5rem", backgroundColor: dark ? "#1F2937" : "#FFFFFF", borderRadius: "0.5rem", border: `1px solid ${dark ? "#374151" : "#E5E7EB"}`, marginBottom: "0.5rem" }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                      <FileText size={20} color="#6366F1" />
+                      <span style={{ fontSize: "0.875rem", color: dark ? "#E5E7EB" : "#374151" }}>
+                        {doc.procurement} – {doc.document} – {doc.fileName}
+                      </span>
+                    </div>
+                    
+                    {/* Tombol hapus */}
+                    <button
+                      onClick={() =>
+                        setSavedDocs((prev) => prev.filter((_, i) => i !== idx))
+                      }
+                      style={{ padding: "0.25rem", borderRadius: "0.25rem", backgroundColor: dark ? "#B91C1C" : "#FEE2E2" }}
+                    >
+                      <X size={16} color="#DC2626" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Input Box */}
-          <footer className="p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-            <div className="flex items-center space-x-3">
-              <div className="relative flex-1">
+          <footer style={{ padding: "1rem", borderTop: `1px solid ${dark ? "#374151" : "#E5E7EB"}`, backgroundColor: dark ? "#1F2937" : "#FFFFFF" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+              <div style={{ position: "relative", flex: 1 }}>
                 <input
                   type="text"
                   placeholder="Ask anything about Procurement"
-                  className="w-full px-4 py-3 rounded-2xl bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 outline-none"
+                  style={{ width: "100%", padding: "0.75rem 1rem", borderRadius: "1rem", backgroundColor: dark ? "#374151" : "#F3F4F6", color: dark ? "#E5E7EB" : "#374151", border: "none", outline: "none" }}
                 />
                 <Paperclip 
                   onClick={() => setShowModal(true)} 
-                  className="w-5 h-5 absolute right-4 top-3.5 text-gray-400 dark:text-gray-300 cursor-pointer" 
+                  size={20}
+                  style={{ position: "absolute", right: "1rem", top: "0.9rem", color: dark ? "#D1D5DB" : "#9CA3AF", cursor: "pointer" }}
                 />
               </div>
-              <button className="px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-medium shadow hover:opacity-90 transition">
+              <button style={{ padding: "0.75rem 1.5rem", borderRadius: "1rem", background: "linear-gradient(to right, #6366F1, #8B5CF6)", color: "#FFFFFF", fontWeight: "500", boxShadow: "0 2px 4px rgba(0,0,0,0.1)" }}>
                 Submit
               </button>
             </div>
@@ -182,22 +190,22 @@ export default function App() {
 
       {/* Modal Pilihan */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl w-96 space-y-4">
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+        <div style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.5)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 50 }}>
+          <div style={{ backgroundColor: dark ? "#1F2937" : "#FFFFFF", padding: "1.5rem", borderRadius: "1rem", width: "24rem", boxShadow: "0 4px 6px rgba(0,0,0,0.2)" }}>
+            <h3 style={{ fontSize: "1.125rem", fontWeight: "600", color: dark ? "#E5E7EB" : "#1F2937", marginBottom: "1rem" }}>
               Pilih Pengadaan & Dokumen
             </h3>
 
             {/* Dropdown Pengadaan */}
             <select
-              className="w-full p-2 rounded-lg border dark:bg-gray-700 dark:text-gray-200"
+              style={{ width: "100%", padding: "0.5rem", borderRadius: "0.5rem", border: `1px solid ${dark ? "#374151" : "#D1D5DB"}`, backgroundColor: dark ? "#374151" : "#FFFFFF", color: dark ? "#E5E7EB" : "#1F2937", marginBottom: "1rem" }}
               value={selectedProcurement}
               onChange={(e) => {
                 setSelectedProcurement(e.target.value);
                 setSelectedDocument("");
               }}
             >
-              <option value="">-- Pilih Jenis Pengadaan --</option>
+              <option value="">-- Pilih Pengadaan --</option>
               {procurementTypes.map((type) => (
                 <option key={type} value={type}>{type}</option>
               ))}
@@ -206,7 +214,7 @@ export default function App() {
             {/* Dropdown Dokumen */}
             {selectedProcurement && (
               <select
-                className="w-full p-2 rounded-lg border dark:bg-gray-700 dark:text-gray-200"
+                style={{ width: "100%", padding: "0.5rem", borderRadius: "0.5rem", border: `1px solid ${dark ? "#374151" : "#D1D5DB"}`, backgroundColor: dark ? "#374151" : "#FFFFFF", color: dark ? "#E5E7EB" : "#1F2937", marginBottom: "1rem" }}
                 value={selectedDocument}
                 onChange={(e) => setSelectedDocument(e.target.value)}
               >
@@ -219,16 +227,16 @@ export default function App() {
 
             {/* Upload File */}
             {selectedDocument && (
-              <div className="border-2 border-dashed rounded-lg p-4 text-center cursor-pointer dark:border-gray-600">
+              <div style={{ border: `2px dashed ${dark ? "#6B7280" : "#D1D5DB"}`, borderRadius: "0.5rem", padding: "1rem", textAlign: "center", cursor: "pointer", marginBottom: "1rem" }}>
                 <input 
                   type="file" 
                   onChange={(e) => setUploadedFile(e.target.files[0])} 
-                  className="hidden" 
+                  style={{ display: "none" }} 
                   id="fileInput"
                 />
                 <label 
                   htmlFor="fileInput" 
-                  className="text-sm text-gray-600 dark:text-gray-300 cursor-pointer"
+                  style={{ fontSize: "0.875rem", color: dark ? "#D1D5DB" : "#4B5563", cursor: "pointer" }}
                 >
                   {uploadedFile ? uploadedFile.name : "Drop file di sini atau klik untuk upload"}
                 </label>
@@ -236,17 +244,17 @@ export default function App() {
             )}
 
             {/* Tombol Aksi */}
-            <div className="flex justify-end space-x-3">
+            <div style={{ display: "flex", justifyContent: "flex-end", gap: "0.75rem" }}>
               <button
                 onClick={() => setShowModal(false)}
-                className="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200"
+                style={{ padding: "0.5rem 1rem", borderRadius: "0.5rem", backgroundColor: dark ? "#4B5563" : "#E5E7EB", color: dark ? "#E5E7EB" : "#374151" }}
               >
                 Batal
               </button>
               <button
                 onClick={handleSaveDoc}
                 disabled={!uploadedFile}
-                className="px-4 py-2 rounded-lg bg-indigo-600 text-white disabled:opacity-50"
+                style={{ padding: "0.5rem 1rem", borderRadius: "0.5rem", backgroundColor: "#4F46E5", color: "#FFFFFF", opacity: !uploadedFile ? 0.5 : 1 }}
               >
                 Simpan
               </button>
