@@ -75,7 +75,7 @@ export default function ProcurementAssistant() {
             <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "flex-start", gap: "0.75rem" }}>
               <div style={{ maxWidth: "36rem", backgroundColor: dark ? "#312E81" : "#EEF2FF", padding: "1rem", borderRadius: "1rem", boxShadow: "0 1px 2px rgba(0,0,0,0.1)" }}>
                 <p style={{ fontSize: "0.875rem", color: dark ? "#E5E7EB" : "#374151" }}>
-                  “Memo Pembentukan Panitia Pengadaan.docx telah saya upload. Bisa dianalisis?”
+                  Memo Pembentukan Panitia Pengadaan.docx telah saya upload. Bisa dianalisis?
                 </p>
               </div>
               <div style={{ width: "2.5rem", height: "2.5rem", borderRadius: "9999px", backgroundColor: "#EF4444", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center"}}>
@@ -87,12 +87,12 @@ export default function ProcurementAssistant() {
               <div style={{ width: "2.5rem", height: "2.5rem", borderRadius: "9999px", backgroundColor: "#6366F1", flexShrink: 0 }}></div>
               <div style={{ maxWidth: "36rem", backgroundColor: dark ? "#1F2937" : "#FFFFFF", padding: "1rem", borderRadius: "1rem", boxShadow: "0 1px 2px rgba(0,0,0,0.1)" }}>
                 <p style={{ fontSize: "0.875rem", color: dark ? "#E5E7EB" : "#374151" }}>
-                  “Okay, ini analisis lengkap untuk Memo Pembentukan Panitia Pengadaan: <br />
+                  Okay, ini analisis lengkap untuk Memo Pembentukan Panitia Pengadaan: <br />
                   - Penjelasan dasar <br />
                   - Daftar poin wajib <br />
                   - Status per poin <br />
                   - Compliance <br />
-                  - Saran dokumen tambahan”
+                  - Saran dokumen tambahan
                 </p>
               </div>
             </div>
